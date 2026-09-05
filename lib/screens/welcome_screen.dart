@@ -41,64 +41,73 @@ class WelcomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 children: [
-                  const SizedBox(height: 30),
-
-                  // LOGO
                   Text(
                     'DOTS',
-                    style: GoogleFonts.baloo2(
-                      fontSize: 64,
-                      fontWeight: FontWeight.w900,
-                      color: const Color(0xFF55B9FF),
-                      height: 0.9,
+                    style: GoogleFonts.lilitaOne(
+                      fontSize: 72,
+                      color: const Color(0xFF19D8FF),
+                      height: 0.85,
+                      letterSpacing: 2,
+                      shadows: const [
+                        Shadow(
+                          offset: Offset(0, 5),
+                          blurRadius: 0,
+                          color: Color(0xFF0876C9),
+                        ),
+                        Shadow(
+                          offset: Offset(0, 8),
+                          blurRadius: 8,
+                          color: Colors.black38,
+                        ),
+                      ],
                     ),
                   ),
 
+                  const SizedBox(height: 2),
+
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         '&',
-                        style: GoogleFonts.baloo2(
+                        style: GoogleFonts.lilitaOne(
                           fontSize: 48,
-                          fontWeight: FontWeight.w900,
-                          color: const Color(0xFFFFC83D),
+                          color: const Color(0xFFFFC928),
+                          shadows: const [
+                            Shadow(
+                              offset: Offset(0, 4),
+                              blurRadius: 0,
+                              color: Color(0xFFD88B00),
+                            ),
+                          ],
                         ),
                       ),
 
-                      const SizedBox(width: 6),
+                      const SizedBox(width: 5),
 
                       Text(
                         'BOXES',
-                        style: GoogleFonts.baloo2(
-                          fontSize: 48,
-                          fontWeight: FontWeight.w900,
-                          color: const Color(0xFFFF4F8B),
+                        style: GoogleFonts.lilitaOne(
+                          fontSize: 55,
+                          color: const Color(0xFFFF4F91),
                           height: 0.9,
+                          letterSpacing: 1,
+                          shadows: const [
+                            Shadow(
+                              offset: Offset(0, 5),
+                              blurRadius: 0,
+                              color: Color(0xFFB51D5B),
+                            ),
+                            Shadow(
+                              offset: Offset(0, 7),
+                              blurRadius: 7,
+                              color: Colors.black38,
+                            ),
+                          ],
                         ),
                       ),
                     ],
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  Text(
-                    'Connect Dots  •  Claim Boxes',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
-                  ),
-
-                  Text(
-                    'Outsmart Your Opponent',
-                    style: GoogleFonts.poppins(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white70,
-                    ),
                   ),
 
                   const SizedBox(height: 25),
@@ -109,7 +118,7 @@ class WelcomeScreen extends StatelessWidget {
                   // PLAY BUTTON
                   SizedBox(
                     width: double.infinity,
-                    height: 64,
+                    height: 70,
                     child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
@@ -137,10 +146,10 @@ class WelcomeScreen extends StatelessWidget {
 
                           Text(
                             'PLAY',
-                            style: GoogleFonts.poppins(
-                              fontSize: 21,
-                              fontWeight: FontWeight.w800,
-                              letterSpacing: 1,
+                            style: GoogleFonts.lilitaOne(
+                              fontSize: 27,
+                              color: const Color(0xFF493300),
+                              letterSpacing: 2,
                             ),
                           ),
                         ],
@@ -153,7 +162,7 @@ class WelcomeScreen extends StatelessWidget {
                   Text(
                     'Small Moves.\nBig Wins!',
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.nunitoSans(
                       fontSize: 14,
                       fontWeight: FontWeight.w500,
                       color: Colors.white70,

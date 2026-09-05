@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'grid_screen.dart';
 
+//import 'game_screen.dart';
 class ModeScreen extends StatelessWidget {
   const ModeScreen({super.key});
 
@@ -11,136 +13,161 @@ class ModeScreen extends StatelessWidget {
       body: SafeArea(
         child: Stack(
           children: [
-            // Background decoration
+            // Background circles
             Positioned(
-              top: -40,
-              right: -30,
-              child: _circle(
-                120,
-                const Color(0xFF6536B8).withOpacity(0.35),
-              ),
+              top: -50,
+              left: -50,
+              child: _backgroundCircle(150, const Color(0xFF2878FF)),
             ),
 
             Positioned(
-              bottom: -50,
-              left: -40,
-              child: _circle(
-                140,
-                const Color(0xFF2799F5).withOpacity(0.25),
-              ),
+              top: 180,
+              right: -55,
+              child: _backgroundCircle(130, const Color(0xFF6847E8)),
             ),
 
             Positioned(
-              bottom: 80,
+              bottom: -45,
+              left: -35,
+              child: _backgroundCircle(120, const Color(0xFF18C8E8)),
+            ),
+
+            Positioned(
+              bottom: -40,
               right: -30,
-              child: _circle(
-                90,
-                const Color(0xFFFF3E83).withOpacity(0.2),
-              ),
+              child: _backgroundCircle(120, const Color(0xFFFF5A9D)),
             ),
 
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Column(
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
 
                   // Back button
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      onPressed: () {
+                    child: GestureDetector(
+                      onTap: () {
                         Navigator.pop(context);
                       },
-                      icon: const Icon(
-                        Icons.arrow_back_rounded,
-                        color: Colors.white,
-                        size: 30,
+                      child: Container(
+                        width: 48,
+                        height: 48,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.10),
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: Colors.white.withOpacity(0.15),
+                          ),
+                        ),
+                        child: const Icon(
+                          Icons.arrow_back_rounded,
+                          color: Colors.white,
+                          size: 25,
+                        ),
                       ),
-                    ),
-                  ),
-
-                  const SizedBox(height: 35),
-
-                  // Heading
-                  Text(
-                    'Choose Game',
-                    style: GoogleFonts.baloo2(
-                      fontSize: 42,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.white,
-                      height: 0.95,
-                    ),
-                  ),
-
-                  Text(
-                    'Mode',
-                    style: GoogleFonts.baloo2(
-                      fontSize: 42,
-                      fontWeight: FontWeight.w900,
-                      color: const Color(0xFF55B9FF),
-                      height: 0.95,
-                    ),
-                  ),
-
-                  const SizedBox(height: 15),
-
-                  Text(
-                    'How do you want to play?',
-                    style: GoogleFonts.poppins(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white70,
                     ),
                   ),
 
                   const SizedBox(height: 45),
 
-                  // PLAY LOCAL
-                  _ModeButton(
+                  // Heading
+                  Text(
+                    'CHOOSE',
+                    style: GoogleFonts.lilitaOne(
+                      fontSize: 48,
+                      color: const Color(0xFF55C7FF),
+                      letterSpacing: 2,
+                      shadows: const [
+                        Shadow(
+                          offset: Offset(0, 4),
+                          blurRadius: 0,
+                          color: Color(0xFF0876C9),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  Text(
+                    'YOUR MODE',
+                    style: GoogleFonts.lilitaOne(
+                      fontSize: 42,
+                      color: const Color(0xFFFF5A9D),
+                      letterSpacing: 1,
+                      shadows: const [
+                        Shadow(
+                          offset: Offset(0, 4),
+                          blurRadius: 0,
+                          color: Color(0xFFB51D5B),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 12),
+
+                  Text(
+                    'HOW DO YOU WANT TO PLAY?',
+                    style: GoogleFonts.nunito(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white70,
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+
+                  const SizedBox(height: 50),
+
+                  // Local game
+                  _GameModeCard(
                     icon: Icons.people_alt_rounded,
-                    title: 'Play Local',
-                    subtitle: 'Two players on the same device',
-                    colors: const [
-                      Color(0xFF3478F6),
-                      Color(0xFF2460D0),
-                    ],
-                    iconColor: const Color(0xFF8DD7FF),
+                    title: 'PLAY LOCAL',
+                    subtitle: 'Two players • Same device',
+                    iconColor: const Color(0xFF55DFFF),
+                    gradient: const [Color(0xFF1769E8), Color(0xFF174DB8)],
                     onTap: () {
-                      // Game screen will be connected here.
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const GridScreen(),
+                        ),
+                      ); // Game screen will be opened here.
                     },
                   ),
 
                   const SizedBox(height: 22),
 
-                  // MULTIPLAYER
-                  _ModeButton(
+                  // Multiplayer
+                  _GameModeCard(
                     icon: Icons.public_rounded,
-                    title: 'Multiplayer',
-                    subtitle: 'Play online with your friends',
-                    colors: const [
-                      Color(0xFF7650E8),
-                      Color(0xFF5B32C7),
-                    ],
-                    iconColor: const Color(0xFFBBA7FF),
+                    title: 'MULTIPLAYER',
+                    subtitle: 'Play online with friends',
+                    iconColor: const Color(0xFFFFB7D5),
+                    gradient: const [Color(0xFF7549E8), Color(0xFF5228B8)],
                     onTap: () {
-                      // Multiplayer will be added later.
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const GridScreen(),
+                        ),
+                      );// Multiplayer screen will be added later.
                     },
                   ),
 
                   const Spacer(),
 
                   Text(
-                    'Same Game.\nMore Fun!',
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.poppins(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white70,
+                    'CONNECT • COMPETE • WIN',
+                    style: GoogleFonts.nunito(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w900,
+                      color: Colors.white54,
+                      letterSpacing: 1.5,
                     ),
                   ),
 
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 25),
                 ],
               ),
             ),
@@ -150,116 +177,119 @@ class ModeScreen extends StatelessWidget {
     );
   }
 
-  static Widget _circle(double size, Color color) {
+  static Widget _backgroundCircle(double size, Color color) {
     return Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: color,
+        color: color.withOpacity(0.18),
       ),
     );
   }
 }
 
+// ------------------------------------------------------------
+// GAME MODE CARD
+// ------------------------------------------------------------
 
-/// Reusable button for the game mode screen.
-class _ModeButton extends StatelessWidget {
+class _GameModeCard extends StatelessWidget {
   final IconData icon;
   final String title;
   final String subtitle;
-  final List<Color> colors;
   final Color iconColor;
+  final List<Color> gradient;
   final VoidCallback onTap;
 
-  const _ModeButton({
+  const _GameModeCard({
     required this.icon,
     required this.title,
     required this.subtitle,
-    required this.colors,
     required this.iconColor,
+    required this.gradient,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(25),
-        child: Ink(
-          width: double.infinity,
-          padding: const EdgeInsets.all(22),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: colors,
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: gradient,
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(26),
+          boxShadow: [
+            BoxShadow(
+              color: gradient.first.withOpacity(0.35),
+              blurRadius: 18,
+              offset: const Offset(0, 8),
             ),
-            borderRadius: BorderRadius.circular(25),
-            boxShadow: [
-              BoxShadow(
-                color: colors.first.withOpacity(0.3),
-                blurRadius: 15,
-                offset: const Offset(0, 8),
+          ],
+        ),
+        child: Row(
+          children: [
+            // Icon
+            Container(
+              width: 65,
+              height: 65,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.13),
+                borderRadius: BorderRadius.circular(20),
               ),
-            ],
-          ),
-          child: Row(
-            children: [
-              // Icon container
-              Container(
-                width: 62,
-                height: 62,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.15),
-                  borderRadius: BorderRadius.circular(18),
-                ),
-                child: Icon(
-                  icon,
-                  size: 34,
-                  color: iconColor,
-                ),
-              ),
+              child: Icon(icon, color: iconColor, size: 34),
+            ),
 
-              const SizedBox(width: 18),
+            const SizedBox(width: 18),
 
-              // Text
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: GoogleFonts.poppins(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
-                      ),
+            // Text
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: GoogleFonts.lilitaOne(
+                      fontSize: 25,
+                      color: Colors.white,
+                      letterSpacing: 1,
                     ),
+                  ),
 
-                    const SizedBox(height: 3),
+                  const SizedBox(height: 3),
 
-                    Text(
-                      subtitle,
-                      style: GoogleFonts.poppins(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white70,
-                      ),
+                  Text(
+                    subtitle,
+                    style: GoogleFonts.nunito(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white70,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+            ),
 
-              const Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 20,
+            // Arrow
+            Container(
+              width: 38,
+              height: 38,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.12),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.arrow_forward_rounded,
                 color: Colors.white,
+                size: 22,
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
