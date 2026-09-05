@@ -1,3 +1,4 @@
+import 'package:dotandboxes/screens/game_screen.dart';
 import 'package:dotandboxes/screens/grid_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,11 +12,9 @@ class PlayerNamesScreen extends StatefulWidget {
 }
 
 class _PlayerNamesScreenState extends State<PlayerNamesScreen> {
-  final TextEditingController _player1Controller =
-      TextEditingController();
+  final TextEditingController _player1Controller = TextEditingController();
 
-  final TextEditingController _player2Controller =
-      TextEditingController();
+  final TextEditingController _player2Controller = TextEditingController();
 
   @override
   void dispose() {
@@ -39,10 +38,7 @@ class _PlayerNamesScreenState extends State<PlayerNamesScreen> {
     Navigator.pushNamed(
       context,
       '/grid-size',
-      arguments: {
-        'player1': player1,
-        'player2': player2,
-      },
+      arguments: {'player1': player1, 'player2': player2},
     );
   }
 
@@ -121,9 +117,7 @@ class _PlayerNamesScreenState extends State<PlayerNamesScreen> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: Colors.white.withOpacity(0.06),
-                  border: Border.all(
-                    color: Colors.white.withOpacity(0.12),
-                  ),
+                  border: Border.all(color: Colors.white.withOpacity(0.12)),
                 ),
                 child: Center(
                   child: Text(
@@ -155,19 +149,30 @@ class _PlayerNamesScreenState extends State<PlayerNamesScreen> {
                 height: 58,
                 child: ElevatedButton(
                   onPressed: () {
+                    String player1 = _player1Controller.text.trim();
+                    String player2 = _player2Controller.text.trim();
+
+                    if (player1.isEmpty) {
+                      player1 = 'PLAYER 1';
+                    }
+
+                    if (player2.isEmpty) {
+                      player2 = 'PLAYER 2';
+                    }
+
                     Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const GridScreen(),
-                          ),
-                        );
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            GridScreen(player1: player1, player2: player2),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF55DFFF),
                     foregroundColor: const Color(0xFF07102F),
                     elevation: 10,
-                    shadowColor:
-                        const Color(0xFF55DFFF).withOpacity(0.4),
+                    shadowColor: const Color(0xFF55DFFF).withOpacity(0.4),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
@@ -216,15 +221,9 @@ class _PlayerNamesScreenState extends State<PlayerNamesScreen> {
           decoration: BoxDecoration(
             color: Colors.white.withOpacity(0.06),
             borderRadius: BorderRadius.circular(18),
-            border: Border.all(
-              color: color.withOpacity(0.45),
-              width: 1.2,
-            ),
+            border: Border.all(color: color.withOpacity(0.45), width: 1.2),
             boxShadow: [
-              BoxShadow(
-                color: color.withOpacity(0.08),
-                blurRadius: 15,
-              ),
+              BoxShadow(color: color.withOpacity(0.08), blurRadius: 15),
             ],
           ),
           child: TextField(
@@ -244,10 +243,7 @@ class _PlayerNamesScreenState extends State<PlayerNamesScreen> {
                 color: Colors.white30,
                 fontSize: 15,
               ),
-              prefixIcon: Icon(
-                icon,
-                color: color,
-              ),
+              prefixIcon: Icon(icon, color: color),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 18,

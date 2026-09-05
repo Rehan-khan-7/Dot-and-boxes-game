@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'game_screen.dart';
+import 'player_names_screen.dart';
 
 class GridScreen extends StatefulWidget {
-  const GridScreen({super.key});
+  final String player1;
+  final String player2;
+
+  const GridScreen({super.key, required this.player1, required this.player2});
 
   @override
   State<GridScreen> createState() => _GridScreenState();
@@ -193,8 +197,11 @@ class _GridScreenState extends State<GridScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              GameScreen(gridSize: selectedSize),
+                          builder: (context) => GameScreen(
+                            gridSize: selectedSize,
+                            player1: widget.player1,
+                            player2: widget.player2,
+                          ),
                         ),
                       );
                     },

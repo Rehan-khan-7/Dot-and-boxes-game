@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'player_names_screen.dart';
+
 class GameScreen extends StatefulWidget {
   final int gridSize;
+  final String player1;
+  final String player2;
 
-  const GameScreen({super.key, required this.gridSize});
+  const GameScreen({
+    super.key,
+    required this.gridSize,
+    required this.player1,
+    required this.player2,
+  });
 
   @override
   State<GameScreen> createState() => _GameScreenState();
@@ -90,9 +98,9 @@ class _GameScreenState extends State<GameScreen> {
     bool isDraw = false;
 
     if (_player1Score > _player2Score) {
-      winner = 'PLAYER 1 WINS!';
+      winner = '${widget.player1.toUpperCase()} WINS!';
     } else if (_player2Score > _player1Score) {
-      winner = 'PLAYER 2 WINS!';
+      winner = '${widget.player2.toUpperCase()} WINS!';
     } else {
       winner = "IT'S A DRAW!";
       isDraw = true;
@@ -207,7 +215,7 @@ class _GameScreenState extends State<GameScreen> {
                   children: [
                     Expanded(
                       child: _resultScoreCard(
-                        'PLAYER 1',
+                        widget.player1.toUpperCase(),
                         _player1Score,
                         const Color(0xFF55DFFF),
                       ),
@@ -217,7 +225,7 @@ class _GameScreenState extends State<GameScreen> {
 
                     Expanded(
                       child: _resultScoreCard(
-                        'PLAYER 2',
+                        widget.player2.toUpperCase(),
                         _player2Score,
                         const Color(0xFFFF5A9D),
                       ),
@@ -279,64 +287,46 @@ class _GameScreenState extends State<GameScreen> {
     );
   }
 
-  Widget _resultScoreCard(
-  String player,
-  int score,
-  Color color,
-) {
-  return Container(
-    padding: const EdgeInsets.symmetric(
-      vertical: 14,
-      horizontal: 10,
-    ),
-    decoration: BoxDecoration(
-      color: color.withOpacity(0.08),
-      borderRadius: BorderRadius.circular(18),
-      border: Border.all(
-        color: color.withOpacity(0.45),
-        width: 1.2,
+  Widget _resultScoreCard(String player, int score, Color color) {
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 10),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.08),
+        borderRadius: BorderRadius.circular(18),
+        border: Border.all(color: color.withOpacity(0.45), width: 1.2),
+        boxShadow: [BoxShadow(color: color.withOpacity(0.12), blurRadius: 15)],
       ),
-      boxShadow: [
-        BoxShadow(
-          color: color.withOpacity(0.12),
-          blurRadius: 15,
-        ),
-      ],
-    ),
-    child: Column(
-      children: [
-        Text(
-          player,
-          style: GoogleFonts.nunito(
-            fontSize: 12,
-            fontWeight: FontWeight.w900,
-            color: color,
-            letterSpacing: 1,
+      child: Column(
+        children: [
+          Text(
+            player,
+            style: GoogleFonts.nunito(
+              fontSize: 12,
+              fontWeight: FontWeight.w900,
+              color: color,
+              letterSpacing: 1,
+            ),
           ),
-        ),
 
-        const SizedBox(height: 4),
+          const SizedBox(height: 4),
 
-        Text(
-          '$score',
-          style: GoogleFonts.lilitaOne(
-            fontSize: 34,
-            color: Colors.white,
+          Text(
+            '$score',
+            style: GoogleFonts.lilitaOne(fontSize: 34, color: Colors.white),
           ),
-        ),
 
-        Text(
-          score == 1 ? 'BOX' : 'BOXES',
-          style: GoogleFonts.nunito(
-            fontSize: 10,
-            fontWeight: FontWeight.w700,
-            color: Colors.white38,
+          Text(
+            score == 1 ? 'BOX' : 'BOXES',
+            style: GoogleFonts.nunito(
+              fontSize: 10,
+              fontWeight: FontWeight.w700,
+              color: Colors.white38,
+            ),
           ),
-        ),
-      ],
-    ),
-  );
-}
+        ],
+      ),
+    );
+  }
 
   void _resetGame() {
     setState(() {
@@ -395,7 +385,7 @@ class _GameScreenState extends State<GameScreen> {
                 children: [
                   Expanded(
                     child: _playerCard(
-                      'PLAYER 1',
+                      widget.player1.toUpperCase(),
                       '$_player1Score',
                       const Color(0xFF55DFFF),
                       true,
@@ -406,7 +396,7 @@ class _GameScreenState extends State<GameScreen> {
 
                   Expanded(
                     child: _playerCard(
-                      'PLAYER 2',
+                      widget.player2.toUpperCase(),
                       '$_player2Score',
                       const Color(0xFFFF5A9D),
                       false,
@@ -420,13 +410,14 @@ class _GameScreenState extends State<GameScreen> {
 
             // TURN
             Text(
-              'PLAYER $_currentPlayer\'S TURN',
+              _currentPlayer == 1
+                  ? "${widget.player1.toUpperCase()}'S TURN"
+                  : "${widget.player2.toUpperCase()}'S TURN",
               style: GoogleFonts.lilitaOne(
-                fontSize: 23,
+                fontSize: 24,
                 color: _currentPlayer == 1
                     ? const Color(0xFF55DFFF)
                     : const Color(0xFFFF5A9D),
-                letterSpacing: 1,
               ),
             ),
 

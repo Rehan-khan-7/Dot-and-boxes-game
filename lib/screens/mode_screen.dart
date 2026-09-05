@@ -150,9 +150,12 @@ class ModeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const GridScreen(),
+                          builder: (context) => GridScreen(
+                            player1: 'PLAYER 1',
+                            player2: 'PLAYER 2',
+                          ),
                         ),
-                      );// Multiplayer screen will be added later.
+                      ); // Multiplayer screen will be added later.
                     },
                   ),
 
