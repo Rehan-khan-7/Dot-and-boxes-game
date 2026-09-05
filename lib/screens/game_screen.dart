@@ -78,6 +78,15 @@ class _GameScreenState extends State<GameScreen> {
       ),
     );
   }
+  void _resetGame() {
+  setState(() {
+    _selectedLines.clear();
+    _player1Score = 0;
+    _player2Score = 0;
+    _currentPlayer = 1;
+    _claimedBoxes.clear();
+  });
+}
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +119,9 @@ class _GameScreenState extends State<GameScreen> {
 
                   const Spacer(),
 
-                  _topButton(Icons.refresh_rounded, () {}),
+                  _topButton(Icons.refresh_rounded, () {
+                    _resetGame();
+                  }),
                 ],
               ),
             ),
