@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'player_names_screen.dart';
 class GameScreen extends StatefulWidget {
   final int gridSize;
 

@@ -1,3 +1,4 @@
+import 'package:dotandboxes/screens/player_names_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'grid_screen.dart';
@@ -130,7 +131,7 @@ class ModeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const GridScreen(),
+                          builder: (context) => const PlayerNamesScreen(),
                         ),
                       ); // Game screen will be opened here.
                     },
